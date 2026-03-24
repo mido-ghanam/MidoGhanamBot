@@ -1,0 +1,9 @@
+{
+  "BASE_URL": "http://127.0.0.1:8000", 
+  "admins": {
+    "6446705072": {
+      "name": "Mohammed Ahmed Ghanam",
+      "username": "midoghanam"
+    }
+  }
+}
