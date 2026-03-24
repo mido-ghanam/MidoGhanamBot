@@ -16,9 +16,17 @@ def start(message):
 @midobot.callback_query_handler(func=lambda call: call.data == "projects")
 def projects_callback(call):
   midobot.edit_message_text("Please wait while collecting data from server..", call.message.chat.id, call.message.message_id)
-  msg = f"{utils.projects.get_projects_count()} Project Has been completed.."
-  midobot.edit_message_text(msg, call.message.chat.id, call.message.message_id)
+  msg = f"{utils.projects.get_projects_count() or 0} Project Has been completed.."
+  msg_obj = midobot.edit_message_text(msg, call.message.chat.id, call.message.message_id)
+  buttons = InlineKeyboardMarkup(row_width=2)
+  projects = utils.projects.get_projects(c='names') or []
+  btns = []
+  for project in projects:
+    btns.append(InlineKeyboardButton(project['name'], callback_data=f"project_{project['id']}"))
+  buttons.add(*btns)
+  midobot.edit_message_reply_markup(chat_id=call.message.chat.id, message_id=call.message.message_id, reply_markup=buttons)
 
+  
 
 
 @midobot.callback_query_handler(func=lambda call: call.data == "skills")
