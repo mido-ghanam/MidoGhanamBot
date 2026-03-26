@@ -1,3 +1,3 @@
 from . import (
-  json_files, projects, 
+  json_files, projects, skills, 
 )
